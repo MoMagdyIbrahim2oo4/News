@@ -44,6 +44,8 @@ dependencies:
   intl: any
   shared_preferences: ^2.5.5
   provider: ^6.1.5+1
+  dio: ^5.11.0
+  pretty_dio_logger: ^1.4.0
 
 dev_dependencies:
   flutter_test:

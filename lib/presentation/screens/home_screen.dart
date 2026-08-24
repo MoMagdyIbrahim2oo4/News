@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: CustomDrawer(onDrawerClicked: onDrawerClicked),
       body: _categoryModel == null
           ? CategoriesContent(onCategoryClick: onCategoryClicked)
-          : CategoryDetailsContent(),
+          : CategoryDetailsContent(categoryModel: _categoryModel!,),
     );
   }
 }
