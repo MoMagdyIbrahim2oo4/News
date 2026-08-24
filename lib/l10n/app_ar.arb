@@ -1,0 +1,20 @@
+{
+  "home": "البيت",
+  "newsApp": "تطبيق أخبار",
+  "goToHome": "الذهاب إلى الصفحة الرئيسية",
+  "theme": "سمة",
+  "dark": "مظلم",
+  "light": "ضوء",
+  "language": "لغة",
+  "goodMorning": "صباح الخير \nإليك بعض الأخبار.",
+  "general": "عام",
+  "business": "عمل",
+  "entertainment": "ترفيه",
+  "health": "صحة",
+  "science": "علوم",
+  "technology": "تكنولوجيا",
+  "sport": "رياضة",
+  "arabic": "العربية",
+  "english": "الانجليزية",
+  "viewAll": "عرض الكل"
+}
