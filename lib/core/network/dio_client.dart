@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:news/core/network/api_constants.dart';
+import 'package:news/core/network/api_key_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class DioClient {
   static Dio? _dio;
@@ -8,10 +10,11 @@ class DioClient {
   }
 
   static Dio _getDio(){
-    final dio=Dio(BaseOptions(baseUrl: 'https://newsapi.org/v2/'));
+    final dio=Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
     dio.interceptors.addAll(
       [
-        PrettyDioLogger(requestBody: true,responseBody: true)
+        PrettyDioLogger(requestBody: true,responseBody: true),
+        ApiKeyInterceptor(),
       ]
     );
     return dio;

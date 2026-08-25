@@ -1,10 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:news/core/network/dio_client.dart';
 import 'package:news/core/network/news_api_service.dart';
 import 'package:news/data/model/category_model.dart';
 import 'package:news/data/model/source_response.dart';
-import 'package:news/presentation/view/news_item.dart';
+import 'package:news/presentation/view/categories_details_content/news_item.dart';
+import 'package:news/presentation/view/categories_details_content/news_list_view.dart';
 
 class CategoryDetailsContent extends StatelessWidget {
   final CategoryModel categoryModel;
@@ -23,7 +25,9 @@ class CategoryDetailsContent extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           else if(snapshot.hasError){
-            return Center(child: Text('Error: ${snapshot.error}'));
+            final error=snapshot.error;
+            final message=error is DioException? error.message:'Unknown';
+            return Center(child: Center(child: Text('Error: $message',style: Theme.of(context).textTheme.displayMedium,)));
           }
           else{
             sources=snapshot.data!;
@@ -44,11 +48,7 @@ class CategoryDetailsContent extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(16.r),
-                      child: TabBarView(children: sources.map((source)=>ListView.separated(
-                          itemBuilder: (context,index)=>NewsItem(),
-                          separatorBuilder: (context,index)=>SizedBox(height: 16.h,),
-                          itemCount: sources.length
-                      )).toList()),
+                      child: TabBarView(children: sources.map((source)=>NewsListView(source_id: source.id!,)).toList()),
                     ),
                   )
                 ],
