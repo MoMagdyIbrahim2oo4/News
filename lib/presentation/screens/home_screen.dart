@@ -5,8 +5,8 @@ import 'package:news/core/providers/app_localization_provider.dart';
 import 'package:news/core/providers/theme_provider.dart';
 import 'package:news/data/model/category_model.dart';
 import 'package:news/l10n/app_localizations.dart';
-import 'package:news/presentation/view/categories_content.dart';
-import 'package:news/presentation/view/category_details_content.dart';
+import 'package:news/presentation/view/categories_content/categories_content.dart';
+import 'package:news/presentation/view/categories_details_content/category_details_content.dart';
 import 'package:news/presentation/view/custom_drawer.dart';
 import 'package:provider/provider.dart';
 
