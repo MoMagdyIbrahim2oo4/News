@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news/core/constants/app_icons.dart';
 import 'package:news/core/providers/app_localization_provider.dart';
 import 'package:news/core/providers/theme_provider.dart';
+import 'package:news/core/utils/app_routes.dart';
 import 'package:news/data/model/category_model.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/presentation/view/categories_content/categories_content.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // String selectedValue = 'Cairo';
   ThemeMode selectedMode = ThemeMode.dark;
-  String lang='en';
+  String lang = 'en';
 
   void onCategoryClicked(CategoryModel category) {
     setState(() {
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
-    var languageProvider=Provider.of<AppLocalizationProvider>(context);
+    var languageProvider = Provider.of<AppLocalizationProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -50,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.searchScreen);
+            },
             icon: SvgPicture.asset(
               AppIcons.searchIcon,
               colorFilter: ColorFilter.mode(
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: CustomDrawer(onDrawerClicked: onDrawerClicked),
       body: _categoryModel == null
           ? CategoriesContent(onCategoryClick: onCategoryClicked)
-          : CategoryDetailsContent(categoryModel: _categoryModel!,),
+          : CategoryDetailsContent(categoryModel: _categoryModel!),
     );
   }
 }

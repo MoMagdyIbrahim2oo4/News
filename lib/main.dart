@@ -8,6 +8,7 @@ import 'package:news/core/utils/app_theme.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/presentation/screens/home_screen.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:news/presentation/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             AppRoutes.homeScreen: (context) => HomeScreen(),
+            AppRoutes.searchScreen: (context) => SearchScreen(),
           },
           initialRoute: AppRoutes.homeScreen,
           theme: AppTheme.lightTheme,

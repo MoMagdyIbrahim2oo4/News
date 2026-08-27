@@ -205,6 +205,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View All'**
   String get viewAll;
+
+  /// No description provided for @viewFullArticel.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Articel'**
+  String get viewFullArticel;
 }
 
 class _AppLocalizationsDelegate
