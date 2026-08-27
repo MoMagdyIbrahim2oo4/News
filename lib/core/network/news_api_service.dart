@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:news/core/network/api_constants.dart';
 import 'package:news/core/network/dio_exception_handler.dart';
 import 'package:news/data/model/news_response.dart';
+import 'package:news/data/model/search_response.dart';
 import 'package:news/data/model/source_response.dart';
 
 class NewsApiService {
@@ -39,6 +40,28 @@ class NewsApiService {
       return newsResponse.articles??[];
     }
     catch(e){
+      throw mapDioException(e, requestOptions);
+    }
+  }
+
+  Future<List<SearchArticles>> search(String q, int page) async {
+    if (q.trim().isEmpty) {
+      return [];
+    }
+
+    final requestOptions = RequestOptions(path: ApiConstants.searchApi);
+    try {
+      final response = await dio.get(
+        requestOptions.path,
+        queryParameters: {
+          "q": q,
+          "pageSize": 4,
+          "page": page,
+        },
+      );
+      SearchResponse searchResponse = SearchResponse.fromJson(response.data);
+      return searchResponse.articles ?? [];
+    } catch (e) {
       throw mapDioException(e, requestOptions);
     }
   }

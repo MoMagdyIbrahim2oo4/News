@@ -6,4 +6,5 @@ class ApiConstants {
   static const String category='category';
   static const String newsApi='https://newsapi.org/v2/top-headlines';
   static const String source='sources';
+  static const String searchApi='https://newsapi.org/v2/everything';
 }

@@ -30,6 +30,7 @@ class _NewsListViewState extends State<NewsListView> {
 
   @override
   void initState() {
+    super.initState();
     // TODO: implement initState
     newsApiService = NewsApiService(DioClient.instance!);
     initialArticles = newsApiService.getNews(widget.source_id, page);
@@ -92,7 +93,7 @@ class _NewsListViewState extends State<NewsListView> {
                     return Center(child: CircularProgressIndicator());
                   }
                   return GestureDetector(
-                      onTap: () => showDetailsSheet(context, articles[index]),
+                      onTap: () => showDetailsSheet(context, article: articles[index]),
                       child: NewsItem(article: articles[index],));
                 },
                 separatorBuilder: (context, index) => SizedBox(height: 16.h,),

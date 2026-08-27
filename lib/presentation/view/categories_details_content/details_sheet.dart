@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:news/data/model/news_response.dart';
+import 'package:news/data/model/search_response.dart'; // لا تنسى إضافة استيراد ملف الـ SearchResponse
 import 'package:news/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-showDetailsSheet(BuildContext context, Articles article) {
+// تعديل الدالة لتقبل أحدهما كـ Named Parameters اختيارية
+showDetailsSheet(BuildContext context, {Articles? article, SearchArticles? searchArticles}) {
+
+  // استخراج القيم الموحدة بغض النظر عن الموديل المُرسل
+  final imageUrl = article?.urlToImage ?? searchArticles?.urlToImage;
+  final content = article?.content ?? searchArticles?.content;
+  final url = article?.url ?? searchArticles?.url;
+
   return showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -15,18 +23,18 @@ showDetailsSheet(BuildContext context, Articles article) {
         margin: EdgeInsets.all(16.r),
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadiusGeometry.circular(16.r),
+          borderRadius: BorderRadius.circular(16.r), // تصحيح لـ BorderRadius.circular
           color: Theme.of(context).canvasColor,
         ),
         child: Column(
           spacing: 8.h,
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(16.r),
+              borderRadius: BorderRadius.circular(16.r),
               child: Image.network(
-                article.urlToImage ??
+                imageUrl ??
                     'https://vanseodesign.com/blog/wp-content/uploads/2015/12/newspaper.jpg',
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -38,22 +46,23 @@ showDetailsSheet(BuildContext context, Articles article) {
                   );
                 },
               ),
-              // child: Image.asset(AppAssets.news, fit: BoxFit.cover,width: double.infinity,),
             ),
             Text(
-              article.content ?? 'No content available.',
+              content ?? 'No content available.',
               style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  _launchUrl(article.url!);
+                  if (url != null) {
+                    _launchUrl(url);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).disabledColor,
-                  shape: RoundedSuperellipseBorder(
-                    borderRadius: BorderRadiusGeometry.circular(8.r),
+                  shape: RoundedRectangleBorder( // تصحيح الخطأ الإملائي في الـ Shape إن وجد
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 16.r),
                 ),
@@ -71,8 +80,8 @@ showDetailsSheet(BuildContext context, Articles article) {
 }
 
 Future<void> _launchUrl(String urlString) async {
-  final Uri url=Uri.parse(urlString);
-  if (!await launchUrl(url,mode: LaunchMode.inAppBrowserView)) {
+  final Uri url = Uri.parse(urlString);
+  if (!await launchUrl(url, mode: LaunchMode.inAppBrowserView)) {
     throw Exception('Could not launch $url');
   }
 }
