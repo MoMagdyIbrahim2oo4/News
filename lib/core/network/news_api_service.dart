@@ -24,12 +24,16 @@ class NewsApiService {
     }
   }
 
-  Future<List<Articles>> getNews(String source) async {
+  Future<List<Articles>> getNews(String source,int page) async {
     final requestOptions=RequestOptions(path: ApiConstants.newsApi);
     try{
       final response = await dio.get(
         requestOptions.path,
-        queryParameters: {ApiConstants.source: source},
+        queryParameters: {
+          ApiConstants.source: source,
+          "pageSize":4,
+          "page":page
+        },
       );
       NewsResponse newsResponse=NewsResponse.fromJson(response.data);
       return newsResponse.articles??[];

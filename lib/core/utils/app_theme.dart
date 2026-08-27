@@ -23,6 +23,7 @@ class AppTheme {
       displaySmall: AppTextStyle.medium24DarkGray,
         labelSmall: AppTextStyle.medium14DarkGray,
       labelMedium: AppTextStyle.bold16DarkGray,
+      labelLarge: AppTextStyle.medium14White
 
     )
   );
@@ -47,6 +48,7 @@ class AppTheme {
           displaySmall: AppTextStyle.medium24white,
         labelSmall: AppTextStyle.medium14White,
         labelMedium: AppTextStyle.bold16White,
+          labelLarge:AppTextStyle.medium14DarkGray
       )
   );
 }
