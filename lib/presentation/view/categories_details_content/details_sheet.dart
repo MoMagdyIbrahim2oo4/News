@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:news/data/model/news_response.dart';
-import 'package:news/data/model/search_response.dart'; // لا تنسى إضافة استيراد ملف الـ SearchResponse
+import 'package:news/data/model/search_response.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// تعديل الدالة لتقبل أحدهما كـ Named Parameters اختيارية
+
 showDetailsSheet(BuildContext context, {Articles? article, SearchArticles? searchArticles}) {
 
-  // استخراج القيم الموحدة بغض النظر عن الموديل المُرسل
+
   final imageUrl = article?.urlToImage ?? searchArticles?.urlToImage;
   final content = article?.content ?? searchArticles?.content;
   final url = article?.url ?? searchArticles?.url;

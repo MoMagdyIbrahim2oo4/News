@@ -11,19 +11,28 @@ import 'package:device_preview/device_preview.dart';
 import 'package:news/presentation/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(
-  DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) =>
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => ThemeProvider()),
-            ChangeNotifierProvider(create: (_) => AppLocalizationProvider()),
-          ],
-          child: MyApp(),
-        ),
-  ),
-);
+import 'dependency_injection/dependency_injection.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // قم بإضافة هذا السطر هنا 👇
+  configureDependencies();
+
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) =>
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => ThemeProvider()),
+              ChangeNotifierProvider(create: (_) => AppLocalizationProvider()),
+            ],
+            child: const MyApp(),
+          ),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
