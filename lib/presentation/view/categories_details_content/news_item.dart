@@ -13,7 +13,6 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // هنا بنعمل استخراج للبيانات أياً كان الموديل اللي باعتو اليوزر
     final imageUrl = article?.urlToImage ?? searchArticles?.urlToImage;
     final title = article?.title ?? searchArticles?.title;
     final author = article?.author ?? searchArticles?.author;
@@ -36,6 +35,22 @@ class NewsItem extends StatelessWidget {
               imageUrl ?? 'https://vanseodesign.com/blog/wp-content/uploads/2015/12/newspaper.jpg',
               fit: BoxFit.cover,
               width: double.infinity,
+              height: 200.h,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+
+                return SizedBox(
+                  height: 200.h,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                          (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  ),
+                );
+              },
               errorBuilder: (context, error, stackTrace) {
                 return Image.network(
                   'https://vanseodesign.com/blog/wp-content/uploads/2015/12/newspaper.jpg',
@@ -46,7 +61,7 @@ class NewsItem extends StatelessWidget {
             ),
           ),
           Text(
-            title == null ? 'There is no title' : title,
+            title ?? 'There is no title',
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Row(

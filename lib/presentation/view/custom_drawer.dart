@@ -79,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
             title: Text(AppLocalizations.of(context)!.language, style: AppTextStyle.bold20white),
           ),
           DrawerContainer(
-            title: themeProvider.isDark ? AppLocalizations.of(context)!.dark : AppLocalizations.of(context)!.light,
+            title: languageProvider.language==Locale('en') ? AppLocalizations.of(context)!.english : AppLocalizations.of(context)!.arabic,
             widget: DropdownButton<String>(
               value: lang,
               underline: SizedBox(),
